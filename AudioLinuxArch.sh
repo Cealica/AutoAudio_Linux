@@ -70,6 +70,12 @@ while [ $e -le 1 ]
 				###Automated script
 				clear
 
+				printf "\n"
+				printf "You must type the answer precisely. (AKA, yes = yes, No = No)\n"
+				printf "The script will start in 5 seconds\n"
+				sleep 5
+				clear
+
 				###Update
 				printf "\n"
                                 printf "Updating The system"
@@ -136,6 +142,9 @@ while [ $e -le 1 ]
 
 							printf "\n"
 							printf "Sorry that number is not available,Try again"
+
+						fi
+
 					done
 
 				### Adding Distrho-ports
@@ -246,7 +255,17 @@ while [ $e -le 1 ]
 
 						;;
 
-				read -p "Do you want to install windows VST?" vst
+						*)
+
+							###Skip DAW Installation
+							printf "\n"
+							printf "Number not recognized, Skipping..."
+
+						;;
+
+				clear
+
+				read -p "Do you want to install windows VST?(yes or no): " vst
 
 					if[[ "yes" == "$vst" ]]; then
 
@@ -309,18 +328,20 @@ while [ $e -le 1 ]
 
 				elif [[ "no" == "$vst" ]]; then
 
-					clear
-					printf "please reboot"
-					printf "\n"
+						clear
+						printf "please reboot"
+						printf "\n"
 
-					((e+))
+						((e+))
 
 				else
 
-					printf "done, please reboot"
-					printf "\n"
+						printf "done, please reboot"
+						printf "\n"
 
-					((e++))
+						((e++))
+
+				fi
 
 			elif [[ "2" == "$NUMANS" ]]; then
 
