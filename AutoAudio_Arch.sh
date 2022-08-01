@@ -118,7 +118,7 @@ while [ $e -le 1 ]
 
 				read -p "Please enter a number to continue: \n" aud
 
-				while [[ $a -le 1]]
+				while [ $a -le 1]
 
 					do
 
@@ -178,7 +178,7 @@ while [ $e -le 1 ]
 				read -p "Pick A number: " daw
 
 					case $daw in
-						1)
+						'1')
 
 							###Bitwig
 							printf "\n"
@@ -187,7 +187,7 @@ while [ $e -le 1 ]
 
 						;;
 
-						2)
+						'2')
 
 							###Reaper
 							printf "\n"
@@ -202,7 +202,7 @@ while [ $e -le 1 ]
 
 						;;
 
-						3)
+						'3')
 
 							###Ardour
 							printf "\n"
@@ -211,7 +211,7 @@ while [ $e -le 1 ]
 
 						;;
 
-						4)
+						'4')
 
 							###LMMS
 							printf "\n"
@@ -220,7 +220,7 @@ while [ $e -le 1 ]
 
 						;;
 
-						5)
+						'5')
 
 							###Qtractor
 							printf "\n"
@@ -229,7 +229,7 @@ while [ $e -le 1 ]
 
 						;;
 
-						6)
+						'6')
 
 							###Rosegarden
 							printf "\n"
@@ -238,7 +238,7 @@ while [ $e -le 1 ]
 
 						;;
 
-						7)
+						'7')
 
 							###MusE
 							printf "\n"
@@ -247,7 +247,7 @@ while [ $e -le 1 ]
 
 						;;
 
-						8)
+						*)
 
 							###Skip DAW Installation
 							printf "\n"
@@ -255,19 +255,13 @@ while [ $e -le 1 ]
 
 						;;
 
-						*)
-
-							###Skip DAW Installation
-							printf "\n"
-							printf "Number not recognized, Skipping..."
-
-						;;
+				esac
 
 				clear
 
 				read -p "Do you want to install windows VST?(yes or no): " vst
 
-					if[[ "yes" == "$vst" ]]; then
+					if [[ "yes" == "$vst" ]]; then
 
 						###Enable multilib
 						sudo cp /etc/pacman.conf /etc/pacman.conf.bak
