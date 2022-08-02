@@ -452,6 +452,8 @@ while [ $e -le 1 ]
 							sudo pacman -S distrho-ports --noconfirm
 							clear
 
+						;;
+
 						'4')
 
 							###Optional DAW
