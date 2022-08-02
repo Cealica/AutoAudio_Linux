@@ -57,7 +57,7 @@ while [ $e -le 1 ]
 		printf "\n"
 		printf "1. Automate the proccess(Some User Input still required, Recommended for fresh install, automatically quits when done)\n"
 		printf "\n"
-		printf "2. Do things separately(Best for advanced users)\n"
+		printf "2. Do things separately(Sub menu, Best for advanced users)\n"
 		printf "\n"
 		printf "3. Exit the script"
 		printf "\n"
@@ -78,7 +78,7 @@ while [ $e -le 1 ]
 
 				###Update
 				printf "\n"
-                                printf "Updating The system"
+                printf "Updating The system"
 				sudo pacman -Syu
 
 				###Grub stuff
@@ -89,13 +89,13 @@ while [ $e -le 1 ]
 
 				###Sysctl.conf
 				printf "\n"
-                                printf "Modifiying  /etc/sysctl.conf"
+                printf "Modifiying  /etc/sysctl.conf"
 				# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
 				echo 'fs.inotify.max_user_watches=600000' | sudo tee -a /etc/sysctl.conf
 
 				###Limits
 				printf "\n"
-                                printf "Modify limits.d/audio.conf"
+                printf "Modify limits.d/audio.conf"
 				# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
 				echo '@audio - rtprio 90
 				@audio - memlock unlimited' | sudo tee -a /etc/security/limits.d/audio.conf
@@ -154,17 +154,17 @@ while [ $e -le 1 ]
 				clear
 
 				###Optional DAW
-		                dawt="Choose what DAW's to install"
+		        dawt="Choose what DAW's to install"
 				printf "%*s\n" $(((${#title}+$COLUMNS)/2))  "$dawt"
-               			printf "\n"
-                		printf "1. Bitwig\n"
-                		printf "\n"
-                		printf "2. Reaper\n"
-                		printf "\n"
-                		printf "3. Ardour\n"
-                		printf "\n"
+               	printf "\n"
+                printf "1. Bitwig\n"
+                printf "\n"
+                printf "2. Reaper\n"
+                printf "\n"
+                printf "3. Ardour\n"
+                printf "\n"
 				printf "4. LMMS\n"
-                		printf "\n"
+                printf "\n"
 				printf "5. Qtractor\n"
 				printf "\n"
 				printf "6. Rosegarden\n"
@@ -259,7 +259,7 @@ while [ $e -le 1 ]
 
 				clear
 
-				read -p "Do you want to install windows VST?(yes or no): " vst
+				read -p "Do you want to add windows VST support?(yes or no): " vst
 
 					if [[ "yes" == "$vst" ]]; then
 
@@ -292,24 +292,23 @@ while [ $e -le 1 ]
 
 						echo " Please read this carefully
 
-						# ---------------------------
+						
 						# Install Windows VST plugins
-						# This is a manual step for you to run when you download plugins.
-						# First, run the plugin installer .exe file
-						# When the installer asks for a directory, make sure you select
-						# one of the directories above.
+						This is a manual step for you to run when you download plugins.
+						First, run the plugin installer .exe file
+						When the installer asks for a directory, make sure you select
+						one of the directories above.
 
-						# VST2 plugins:
-						#   C:\Program Files\Steinberg\VstPlugins
-						# OR
-						#   C:\Program Files\Common Files\VST2
+						VST2 plugins:
+						  	C:\Program Files\Steinberg\VstPlugins
+						 OR
+						  	C:\Program Files\Common Files\VST2
 
-						# VST3 plugins:
-						#   C:\Program Files\Common Files\VST3
-						# ---------------------------
+						VST3 plugins:
+							C:\Program Files\Common Files\VST3
 
-						# Each time you install a new plugin, you need to run:
-						# yabridgectl sync
+							Each time you install a new plugin, you need to run:
+							yabridgectl sync
 						" > ~/Readme.txt
 
 						clear
@@ -340,7 +339,303 @@ while [ $e -le 1 ]
 			elif [[ "2" == "$NUMANS" ]]; then
 
 				###Manual Guided Installation
-				printf "test text 2"
+				submen = "Sub Menu(For Advanced Users.)\n"
+				printf "%*s\n" $(((${#title}+$COLUMNS)/2))  "$submen"
+
+				###SubMen
+               	printf "\n"
+                printf "1. Do Core system modification(GRUB, Sysctl.conf, Limits, Adding User to group\n"
+                printf "\n"
+                printf "2. Install Audio Servers?\n"
+                printf "\n"
+                printf "3.Adding Distrho-ports\n"
+                printf "\n"
+				printf "4. Add Windows VST Support\n"
+                printf "\n"
+				printf "5. Qtractor\n"
+				printf "\n"
+				printf "6. Rosegarden\n"
+				printf "\n"
+				printf "7. MusE\n"
+				printf "\n"
+				printf "8. Don't install any DAW"
+				printf "\n"
+				printf "\n"
+
+				read -p "Pick A number: " daw
+
+					case $daw in
+						'1')
+
+							###Update
+							printf "\n"
+                			printf "Updating The system"
+							sudo pacman -Syu
+
+							###Grub stuff
+							printf "\n"
+							printf "Modifiying GRUB"
+							sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet threadirqs cpufreq.default_governor=performance"/g' /etc/default/grub
+							sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+							###Sysctl.conf
+							printf "\n"
+                			printf "Modifiying  /etc/sysctl.conf"
+							# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
+							echo 'fs.inotify.max_user_watches=600000' | sudo tee -a /etc/sysctl.conf
+
+							###Limits
+							printf "\n"
+                			printf "Modify limits.d/audio.conf"
+							# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
+							echo '@audio - rtprio 90
+							@audio - memlock unlimited' | sudo tee -a /etc/security/limits.d/audio.conf
+
+							###Adding usr to group
+							printf "\n"
+							printf "Add ourselves to the audio group"
+							sudo usermod -a -G audio $USER
+
+							clear
+
+						;;
+
+						'2')
+
+							### Audio Drivers
+							printf "\n"
+							printf "What audio server do you want?\n"
+							printf "\n"
+							printf "1.JACK + Pulseaudio\n"
+							printf "\n"
+							printf "2.Pipewire\n"
+							printf "\n"
+
+							read -p "Please enter a number to continue: \n" aud
+
+							while [ $a -le 1]
+
+								do
+
+									if [[ "1" == "$aud" ]]; then
+
+										### pulseaudio-jack: To bridge pulse to jack using Cadence
+										### alsa-utils: For alsamixer (to increase base level of sound card)
+										printf "\n"
+										printf "Installing  JACK + Pulseaudio  packages"
+										sudo pacman -S cadence pulseaudio-jack alsa-utils --noconfirm
+										((a++))
+
+									elif [[ "2" == "$aud" ]]; then
+
+										printf "\n"
+										printf "Installing Pipewire packages"
+										printf "Simulate instaling pipewire"
+										((a++))
+
+									else
+
+										printf "\n"
+										printf "Sorry that number is not available,Try again"
+
+								fi
+
+							done
+
+						;;
+
+						'3')
+
+							### Adding Distrho-ports
+							printf "\n"
+							printf "Adding distrho-ports"
+							sudo pacman -S distrho-ports --noconfirm
+							clear
+
+						'4')
+
+							###Optional DAW
+							dawt="Choose what DAW's to install"
+							printf "%*s\n" $(((${#title}+$COLUMNS)/2))  "$dawt"
+							printf "\n"
+							printf "1. Bitwig\n"
+							printf "\n"
+							printf "2. Reaper\n"
+							printf "\n"
+							printf "3. Ardour\n"
+							printf "\n"
+							printf "4. LMMS\n"
+							printf "\n"
+							printf "5. Qtractor\n"
+							printf "\n"
+							printf "6. Rosegarden\n"
+							printf "\n"
+							printf "7. MusE\n"
+							printf "\n"
+							printf "8. Don't install any DAW"
+							printf "\n"
+							printf "\n"
+
+							read -p "Pick A number: " daw
+
+								case $daw in
+									'1')
+
+										###Bitwig
+										printf "\n"
+										printf "Installing Bitwig"
+										yay -S bitwig-studio --noconfirm
+
+									;;
+
+									'2')
+
+										###Reaper
+										printf "\n"
+										printf "Installing Reaper"
+										sudo pacman -S wget --noconfirm
+										wget -O reaper.tar.xz http://reaper.fm/files/6.x/reaper658_linux_x86_64.tar.xz
+										mkdir ./reaper
+										tar -C ./reaper -xf reaper.tar.xz
+										sudo ./reaper/reaper_linux_x86_64/install-reaper.sh --install /opt --integrate-desktop --usr-local-bin-symlink
+										rm -rf ./reaper
+										rm reaper.tar.xz
+
+									;;
+
+									'3')
+
+										###Ardour
+										printf "\n"
+										printf "Installing Ardour"
+										sudo pacman -S ardour --noconfirm
+
+									;;
+
+									'4')
+
+										###LMMS
+										printf "\n"
+										printf "Installing LMMS"
+										sudo pacman -S lmms --noconfirm
+
+									;;
+
+									'5')
+
+										###Qtractor
+										printf "\n"
+										printf "Installing Qtractor"
+										sudo pacman -S qtractor --noconfirm
+
+									;;
+
+									'6')
+
+										###Rosegarden
+										printf "\n"
+										printf "Installing Rosegarden"
+										sudo pacman -S rosegarden --noconfirm
+
+									;;
+
+									'7')
+
+										###MusE
+										printf "\n"
+										printf "Installing MusE"
+										sudo pacman -S muse --noconfirm
+
+									;;
+
+									*)
+
+										###Skip DAW Installation
+										printf "\n"
+										printf "Not Installing Any DAW"
+
+									;;
+
+							esac
+
+							clear
+
+						;;
+
+						'5')
+							###Enable multilib
+							sudo cp /etc/pacman.conf /etc/pacman.conf.bak
+							cat /etc/pacman.conf.bak | tr '\n' '\f' | sed -e 's/#\[multilib\]\f#Include = \/etc\/pacman.d\/mirrorlist/\[multilib\]\fInclude = \/etc\/pacman.d\/mirrorlist/g'  | tr '\f' '\n' | sudo tee /etc/pacman.conf
+							sudo pacman -Syyu
+
+							###Installing wine-staging
+							###Fair warning: You may need to downgrade if wine-staging has regressions.
+							###installing the downgrade package from AUR will allow you to accomplish that.
+							###after which you must provide the wine-staging version you like.
+							printf "Installing Wine-staging"
+							sudo pacman -S wine-staging winetricks --noconfirm
+
+							### Base wine packages required for proper plugin functionality
+							winetricks corefonts
+
+							yay -S yabridge-bin --noconfirm
+
+							# Create common VST paths
+							mkdir -p "$HOME/.wine/drive_c/Program Files/Steinberg/VstPlugins"
+							mkdir -p "$HOME/.wine/drive_c/Program Files/Common Files/VST2"
+							mkdir -p "$HOME/.wine/drive_c/Program Files/Common Files/VST3"
+
+							# Add them into yabridge
+							yabridgectl add "$HOME/.wine/drive_c/Program Files/Steinberg/VstPlugins"
+							yabridgectl add "$HOME/.wine/drive_c/Program Files/Common Files/VST2"
+							yabridgectl add "$HOME/.wine/drive_c/Program Files/Common Files/VST3"
+
+							echo " Please read this carefully
+
+							
+							# Install Windows VST plugins
+							This is a manual step for you to run when you download plugins.
+							First, run the plugin installer .exe file
+							When the installer asks for a directory, make sure you select
+							one of the directories above.
+
+							VST2 plugins:
+								C:\Program Files\Steinberg\VstPlugins
+							OR
+								C:\Program Files\Common Files\VST2
+
+							VST3 plugins:
+								C:\Program Files\Common Files\VST3
+
+								Each time you install a new plugin, you need to run:
+								yabridgectl sync
+							" > ~/Readme.txt
+
+							clear
+							printf "There's a Readme.txt on your home user directory, please read it as it contains critical information on your vst bridging\n"
+							printf "\n"
+
+						;;
+
+						'6')
+
+							###Go back to main
+							printf "go back to main\n"
+							
+						;;
+
+						*)
+
+							###Skip DAW Installation
+							printf "\n"
+							printf "Not Installing Any DAW"
+
+						;;
+
+				esac
+
+
+
 
 			elif [[ "3" == "$NUMANS" ]]; then
 
