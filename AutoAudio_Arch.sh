@@ -350,9 +350,11 @@ while [ $e -le 1 ]
                 		printf "\n"
                 		printf "3.Adding Distrho-ports\n"
                 		printf "\n"
-				printf "4. Add Windows VST Support\n"
+				printf "4.Install DAWS"
+				printf "\n"
+				printf "5. Add Windows VST Support\n"
                 		printf "\n"
-				printf "5. Exit Submenu"
+				printf "6. Exit Submenu"
 				printf "\n"
 				printf "\n"
 
