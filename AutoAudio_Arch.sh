@@ -628,9 +628,9 @@ while [ $e -le 1 ]
 
 						*)
 
-							###Skip DAW Installation
+							###Default
 							printf "\n"
-							printf "Not Installing Any DAW"
+							printf "Error, Going back to main..."
 
 						;;
 
