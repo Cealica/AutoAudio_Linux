@@ -7,5 +7,7 @@ This script is still on the alpha stage so bugs will appear and hope you underst
 Things to reconsider.
 
 1.The script is not yet final so expect some bugs
+
 2.Submenu is still clunky (the 2nd option)
+
 3.After Arch, i'll move to debian and ubuntu
