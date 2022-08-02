@@ -413,7 +413,7 @@ while [ $e -le 1 ]
 
 							read -p "Please enter a number to continue: \n" aud
 
-							while [ $a -le 1]
+							while [ $a -le 1 ]
 
 								do
 
