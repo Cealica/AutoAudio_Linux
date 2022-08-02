@@ -116,9 +116,9 @@ while [ $e -le 1 ]
 				printf "2.Pipewire\n"
 				printf "\n"
 
-				read -p "Please enter a number to continue: \n" aud
+				read -p "Please enter a number to continue: " aud
 
-				while [ $a -le 1]
+				while [ $a -le 1 ]
 
 					do
 
