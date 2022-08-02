@@ -78,7 +78,7 @@ while [ $e -le 1 ]
 
 				###Update
 				printf "\n"
-                printf "Updating The system"
+                		printf "Updating The system"
 				sudo pacman -Syu
 
 				###Grub stuff
@@ -89,13 +89,13 @@ while [ $e -le 1 ]
 
 				###Sysctl.conf
 				printf "\n"
-                printf "Modifiying  /etc/sysctl.conf"
+                		printf "Modifiying  /etc/sysctl.conf"
 				# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
 				echo 'fs.inotify.max_user_watches=600000' | sudo tee -a /etc/sysctl.conf
 
 				###Limits
 				printf "\n"
-                printf "Modify limits.d/audio.conf"
+                		printf "Modify limits.d/audio.conf"
 				# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
 				echo '@audio - rtprio 90
 				@audio - memlock unlimited' | sudo tee -a /etc/security/limits.d/audio.conf
@@ -154,17 +154,17 @@ while [ $e -le 1 ]
 				clear
 
 				###Optional DAW
-		        dawt="Choose what DAW's to install"
+		        	dawt="Choose what DAW's to install"
 				printf "%*s\n" $(((${#title}+$COLUMNS)/2))  "$dawt"
-               	printf "\n"
-                printf "1. Bitwig\n"
-                printf "\n"
-                printf "2. Reaper\n"
-                printf "\n"
-                printf "3. Ardour\n"
-                printf "\n"
+               			printf "\n"
+               			printf "1. Bitwig\n"
+                		printf "\n"
+                		printf "2. Reaper\n"
+                		printf "\n"
+                		printf "3. Ardour\n"
+                		printf "\n"
 				printf "4. LMMS\n"
-                printf "\n"
+                		printf "\n"
 				printf "5. Qtractor\n"
 				printf "\n"
 				printf "6. Rosegarden\n"
@@ -343,33 +343,27 @@ while [ $e -le 1 ]
 				printf "%*s\n" $(((${#title}+$COLUMNS)/2))  "$submen"
 
 				###SubMen
-               	printf "\n"
-                printf "1. Do Core system modification(GRUB, Sysctl.conf, Limits, Adding User to group\n"
-                printf "\n"
-                printf "2. Install Audio Servers?\n"
-                printf "\n"
-                printf "3.Adding Distrho-ports\n"
-                printf "\n"
+               			printf "\n"
+                		printf "1. Do Core system modification(GRUB, Sysctl.conf, Limits, Adding User to group\n"
+                		printf "\n"
+                		printf "2. Install Audio Servers?\n"
+                		printf "\n"
+                		printf "3.Adding Distrho-ports\n"
+                		printf "\n"
 				printf "4. Add Windows VST Support\n"
-                printf "\n"
-				printf "5. Qtractor\n"
-				printf "\n"
-				printf "6. Rosegarden\n"
-				printf "\n"
-				printf "7. MusE\n"
-				printf "\n"
-				printf "8. Don't install any DAW"
+                		printf "\n"
+				printf "5. Exit Submenu"
 				printf "\n"
 				printf "\n"
 
-				read -p "Pick A number: " daw
+				read -p "Pick A number: " sub
 
-					case $daw in
+					case $sub in
 						'1')
 
 							###Update
 							printf "\n"
-                			printf "Updating The system"
+                					printf "Updating The system"
 							sudo pacman -Syu
 
 							###Grub stuff
@@ -380,13 +374,13 @@ while [ $e -le 1 ]
 
 							###Sysctl.conf
 							printf "\n"
-                			printf "Modifiying  /etc/sysctl.conf"
+                					printf "Modifiying  /etc/sysctl.conf"
 							# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
 							echo 'fs.inotify.max_user_watches=600000' | sudo tee -a /etc/sysctl.conf
 
 							###Limits
 							printf "\n"
-                			printf "Modify limits.d/audio.conf"
+                					printf "Modify limits.d/audio.conf"
 							# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
 							echo '@audio - rtprio 90
 							@audio - memlock unlimited' | sudo tee -a /etc/security/limits.d/audio.conf
