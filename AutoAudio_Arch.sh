@@ -134,8 +134,13 @@ while [ $e -le 1 ]
 						elif [[ "2" == "$aud" ]]; then
 
 							printf "\n"
-							printf "Installing Pipewire packages"
-							printf "Simulate instaling pipewire"
+							printf "Installing Pipewire packages\n"
+							echo "NOTE: When prompted, select (y)es to remove pulseaudio and pulseaudio-bluetooth."
+							# alsa-utils: For alsamixer (to increase base level of sound card)
+							sudo pacman -S pipewire pipewire-alsa pipewire-jack pipewire-pulse alsa-utils helvum
+
+							echo "/usr/lib/pipewire-0.3/jack" | sudo tee /etc/ld.so.conf.d/pipewire-jack.conf
+							sudo ldconfig
 							((a++))
 
 						else
