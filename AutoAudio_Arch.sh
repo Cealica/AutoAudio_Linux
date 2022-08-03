@@ -152,24 +152,36 @@ while [ $e -le 1 ]
 
 					done
 
-				### Adding Distrho-ports
-				printf "\n"
-				printf "Adding distrho-ports"
-				sudo pacman -S distrho-ports --noconfirm
-				clear
+				read "Do you want to install some Plugins(Yes to continue): \n" plugin
+
+					if [[ "Yes" == "$plugin" ]]; then
+
+						### Adding Distrho-ports
+						printf "\n"
+						printf "Adding distrho-ports"
+						sudo pacman -S distrho-ports --noconfirm
+						clear
+
+					else
+
+						### Skipping Distrho-ports
+						printf "/n"
+						printf "Ok Skipping..."
+
+					fi
 
 				###Optional DAW
 		        	dawt="Choose what DAW's to install"
 				printf "%*s\n" $(((${#title}+$COLUMNS)/2))  "$dawt"
-               			printf "\n"
-               			printf "1. Bitwig\n"
-                		printf "\n"
-                		printf "2. Reaper\n"
-                		printf "\n"
-                		printf "3. Ardour\n"
-                		printf "\n"
+               	printf "\n"
+               	printf "1. Bitwig\n"
+                printf "\n"
+                printf "2. Reaper\n"
+                printf "\n"
+                printf "3. Ardour\n"
+                printf "\n"
 				printf "4. LMMS\n"
-                		printf "\n"
+                printf "\n"
 				printf "5. Qtractor\n"
 				printf "\n"
 				printf "6. Rosegarden\n"
