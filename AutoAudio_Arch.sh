@@ -156,15 +156,15 @@ while [ $e -le 1 ]
 				clear
 		        	dawt="Choose what DAW's to install"
 				printf "%*s\n" $(((${#title}+$COLUMNS)/2))  "$dawt"
-               	printf "\n"
-               	printf "1. Bitwig\n"
-                printf "\n"
-                printf "2. Reaper\n"
-                printf "\n"
-                printf "3. Ardour\n"
-                printf "\n"
+               			printf "\n"
+               			printf "1. Bitwig\n"
+                		printf "\n"
+                		printf "2. Reaper\n"
+                		printf "\n"
+                		printf "3. Ardour\n"
+                		printf "\n"
 				printf "4. LMMS\n"
-                printf "\n"
+                		printf "\n"
 				printf "5. Qtractor\n"
 				printf "\n"
 				printf "6. Rosegarden\n"
@@ -259,7 +259,7 @@ while [ $e -le 1 ]
 				
 				clear
 				
-				read -p "Do you want to install some Plugins(Yes to continue): \n" plugin
+				read -p "Do you want to install some Plugins(Yes to continue): " plugin
 
 					if [[ "Yes" == "$plugin" ]]; then
 
@@ -342,13 +342,15 @@ while [ $e -le 1 ]
 				elif [[ "no" == "$vst" ]]; then
 
 						clear
-						printf "please reboot"
+						printf "\n"
+						printf "please reboot and thank you for using the script! "
 						printf "\n"
 
 						((e++))
 
 				else
 
+						printf "\n"
 						printf "done, please reboot"
 						printf "\n"
 
@@ -640,6 +642,7 @@ while [ $e -le 1 ]
 
 							###Go back to main
 							printf "go back to main\n"
+							clear
 							
 						;;
 
@@ -648,6 +651,7 @@ while [ $e -le 1 ]
 							###Default
 							printf "\n"
 							printf "Error, Going back to main..."
+							clear
 
 						;;
 
