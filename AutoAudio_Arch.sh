@@ -152,25 +152,8 @@ while [ $e -le 1 ]
 
 					done
 
-				read "Do you want to install some Plugins(Yes to continue): \n" plugin
-
-					if [[ "Yes" == "$plugin" ]]; then
-
-						### Adding Distrho-ports
-						printf "\n"
-						printf "Adding distrho-ports"
-						sudo pacman -S distrho-ports --noconfirm
-						clear
-
-					else
-
-						### Skipping Distrho-ports
-						printf "/n"
-						printf "Ok Skipping..."
-
-					fi
-
 				###Optional DAW
+				clear
 		        	dawt="Choose what DAW's to install"
 				printf "%*s\n" $(((${#title}+$COLUMNS)/2))  "$dawt"
                	printf "\n"
@@ -273,6 +256,26 @@ while [ $e -le 1 ]
 						;;
 
 				esac
+				
+				clear
+				
+				read -p "Do you want to install some Plugins(Yes to continue): \n" plugin
+
+					if [[ "Yes" == "$plugin" ]]; then
+
+						### Adding Distrho-ports
+						printf "\n"
+						printf "Adding distrho-ports"
+						sudo pacman -S distrho-ports --noconfirm
+						clear
+
+					else
+
+						### Skipping Distrho-ports
+						printf "/n"
+						printf "Ok Skipping..."
+
+					fi
 
 				clear
 
@@ -342,7 +345,7 @@ while [ $e -le 1 ]
 						printf "please reboot"
 						printf "\n"
 
-						((e+))
+						((e++))
 
 				else
 
@@ -356,6 +359,7 @@ while [ $e -le 1 ]
 			elif [[ "2" == "$NUMANS" ]]; then
 
 				###Manual Guided Installation
+				clear
 				submen = "Sub Menu(For Advanced Users.)\n"
 				printf "%*s\n" $(((${#title}+$COLUMNS)/2))  "$submen"
 
