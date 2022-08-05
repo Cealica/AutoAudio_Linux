@@ -80,33 +80,8 @@ while [ $e -le 1 ]
 				printf "\n"
                 		printf "Updating The system"
 				sudo pacman -Syu
-
-				###Grub stuff
-				printf "\n"
-				printf "Modifiying GRUB"
-				sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet threadirqs cpufreq.default_governor=performance"/g' /etc/default/grub
-				sudo grub-mkconfig -o /boot/grub/grub.cfg
-
-				###Sysctl.conf
-				printf "\n"
-                		printf "Modifiying  /etc/sysctl.conf"
-				# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
-				echo 'fs.inotify.max_user_watches=600000' | sudo tee -a /etc/sysctl.conf
-
-				###Limits
-				printf "\n"
-                		printf "Modify limits.d/audio.conf"
-				# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
-				echo '@audio - rtprio 90
-				@audio - memlock unlimited' | sudo tee -a /etc/security/limits.d/audio.conf
-
-				###Adding usr to group
-				printf "\n"
-				printf "Add ourselves to the audio group"
-				sudo usermod -a -G audio $USER
-
 				clear
-
+				
 				### Audio Drivers
 				printf "\n"
 				printf "What audio server do you want?\n"
@@ -152,6 +127,32 @@ while [ $e -le 1 ]
 
 					done
 
+				###Grub stuff
+				printf "\n"
+				printf "Modifiying GRUB"
+				sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet threadirqs cpufreq.default_governor=performance"/g' /etc/default/grub
+				sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+				###Sysctl.conf
+				printf "\n"
+                		printf "Modifiying  /etc/sysctl.conf"
+				# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
+				echo 'fs.inotify.max_user_watches=600000' | sudo tee -a /etc/sysctl.conf
+
+				###Limits
+				printf "\n"
+                		printf "Modify limits.d/audio.conf\n"
+				# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
+				echo '@audio - rtprio 90
+				@audio - memlock unlimited' | sudo tee -a /etc/security/limits.d/audio.conf
+
+				###Adding usr to group
+				printf "\n"
+				printf "Add ourselves to the audio group\n"
+				sudo usermod -a -G audio $USER
+
+				clear
+				
 				###Optional DAW
 				clear
 		        	dawt="Choose what DAW's to install"
@@ -259,7 +260,7 @@ while [ $e -le 1 ]
 				
 				clear
 				
-				read -p "Do you want to install some Plugins(Yes to continue): " plugin
+				read -p "Do you want to install some Plugins(Yes to continue, press enter to skip): " plugin
 
 					if [[ "Yes" == "$plugin" ]]; then
 
@@ -334,7 +335,7 @@ while [ $e -le 1 ]
 						clear
 						printf "There's a Readme.txt on your home user directory, please read it as it contains critical information on your vst bridging\n"
 						printf "\n"
-						printf "Done - please reboot."
+						printf "please reboot and thank you for using the script"
 						printf "\n"
 
 						((e++))
@@ -351,7 +352,7 @@ while [ $e -le 1 ]
 				else
 
 						printf "\n"
-						printf "done, please reboot"
+						printf "done, please reboot and thank you for using the script!"
 						printf "\n"
 
 						((e++))
@@ -373,7 +374,7 @@ while [ $e -le 1 ]
                 		printf "\n"
                 		printf "3.Adding Distrho-ports\n"
                 		printf "\n"
-				printf "4.Install DAWS"
+				printf "4.Install DAWS\n"
 				printf "\n"
 				printf "5. Add Windows VST Support\n"
                 		printf "\n"
@@ -388,18 +389,18 @@ while [ $e -le 1 ]
 
 							###Update
 							printf "\n"
-                					printf "Updating The system"
+                					printf "Updating The system\n"
 							sudo pacman -Syu
 
 							###Grub stuff
 							printf "\n"
-							printf "Modifiying GRUB"
+							printf "Modifiying GRUB\n"
 							sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet threadirqs cpufreq.default_governor=performance"/g' /etc/default/grub
 							sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 							###Sysctl.conf
 							printf "\n"
-                					printf "Modifiying  /etc/sysctl.conf"
+                					printf "Modifiying  /etc/sysctl.conf\n"
 							# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
 							echo 'fs.inotify.max_user_watches=600000' | sudo tee -a /etc/sysctl.conf
 
@@ -412,7 +413,7 @@ while [ $e -le 1 ]
 
 							###Adding usr to group
 							printf "\n"
-							printf "Add ourselves to the audio group"
+							printf "Add ourselves to the audio group\n"
 							sudo usermod -a -G audio $USER
 
 							clear
