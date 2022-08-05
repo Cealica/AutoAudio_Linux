@@ -102,7 +102,7 @@ while [ $e -le 1 ]
 							### pulseaudio-jack: To bridge pulse to jack using Cadence
 							### alsa-utils: For alsamixer (to increase base level of sound card)
 							printf "\n"
-							printf "Installing  JACK + Pulseaudio  packages"
+							printf "Installing  JACK + Pulseaudio  packages\n"
 							sudo pacman -S cadence pulseaudio-jack alsa-utils --noconfirm
 							((a++))
 
@@ -129,7 +129,7 @@ while [ $e -le 1 ]
 
 				###Grub stuff
 				printf "\n"
-				printf "Modifiying GRUB"
+				printf "Modifiying GRUB\n"
 				sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet threadirqs cpufreq.default_governor=performance"/g' /etc/default/grub
 				sudo grub-mkconfig -o /boot/grub/grub.cfg
 
@@ -183,7 +183,7 @@ while [ $e -le 1 ]
 
 							###Bitwig
 							printf "\n"
-							printf "Installing Bitwig"
+							printf "Installing Bitwig\n"
 							yay -S bitwig-studio --noconfirm
 
 						;;
@@ -192,7 +192,7 @@ while [ $e -le 1 ]
 
 							###Reaper
 							printf "\n"
-							printf "Installing Reaper"
+							printf "Installing Reaper\n"
 							sudo pacman -S wget --noconfirm
 							wget -O reaper.tar.xz http://reaper.fm/files/6.x/reaper658_linux_x86_64.tar.xz
 							mkdir ./reaper
@@ -207,7 +207,7 @@ while [ $e -le 1 ]
 
 							###Ardour
 							printf "\n"
-							printf "Installing Ardour"
+							printf "Installing Ardour\n"
 							sudo pacman -S ardour --noconfirm
 
 						;;
@@ -216,7 +216,7 @@ while [ $e -le 1 ]
 
 							###LMMS
 							printf "\n"
-							printf "Installing LMMS"
+							printf "Installing LMMS\n"
 							sudo pacman -S lmms --noconfirm
 
 						;;
@@ -225,7 +225,7 @@ while [ $e -le 1 ]
 
 							###Qtractor
 							printf "\n"
-							printf "Installing Qtractor"
+							printf "Installing Qtractor\n"
 							sudo pacman -S qtractor --noconfirm
 
 						;;
@@ -243,7 +243,7 @@ while [ $e -le 1 ]
 
 							###MusE
 							printf "\n"
-							printf "Installing MusE"
+							printf "Installing MusE\n"
 							sudo pacman -S muse --noconfirm
 
 						;;
@@ -266,7 +266,7 @@ while [ $e -le 1 ]
 
 						### Adding Distrho-ports
 						printf "\n"
-						printf "Adding distrho-ports"
+						printf "Adding distrho-ports\n"
 						sudo pacman -S distrho-ports --noconfirm
 						clear
 
@@ -274,7 +274,7 @@ while [ $e -le 1 ]
 
 						### Skipping Distrho-ports
 						printf "/n"
-						printf "Ok Skipping..."
+						printf "Ok Skipping...\n"
 
 					fi
 
@@ -442,21 +442,25 @@ while [ $e -le 1 ]
 										### pulseaudio-jack: To bridge pulse to jack using Cadence
 										### alsa-utils: For alsamixer (to increase base level of sound card)
 										printf "\n"
-										printf "Installing  JACK + Pulseaudio  packages"
+										printf "Installing  JACK + Pulseaudio  packages\n"
 										sudo pacman -S cadence pulseaudio-jack alsa-utils --noconfirm
 										((a++))
 
 									elif [[ "2" == "$aud" ]]; then
 
 										printf "\n"
-										printf "Installing Pipewire packages"
-										printf "Simulate instaling pipewire"
+										printf "Installing Pipewire packages\n"
+										echo "NOTE: When prompted, select (y)es to remove pulseaudio and pulseaudio-bluetooth."
+										# alsa-utils: For alsamixer (to increase base level of sound card)
+										sudo pacman -S pipewire pipewire-alsa pipewire-jack pipewire-pulse alsa-utils helvum
+										echo "/usr/lib/pipewire-0.3/jack" | sudo tee /etc/ld.so.conf.d/pipewire-jack.conf
+										sudo ldconfig
 										((a++))
 
 									else
 
 										printf "\n"
-										printf "Sorry that number is not available,Try again"
+										printf "Sorry that number is not available,Try again\n "
 
 								fi
 
@@ -468,7 +472,7 @@ while [ $e -le 1 ]
 
 							### Adding Distrho-ports
 							printf "\n"
-							printf "Adding distrho-ports"
+							printf "Adding distrho-ports\n"
 							sudo pacman -S distrho-ports --noconfirm
 							clear
 
@@ -505,7 +509,7 @@ while [ $e -le 1 ]
 
 										###Bitwig
 										printf "\n"
-										printf "Installing Bitwig"
+										printf "Installing Bitwig\n"
 										yay -S bitwig-studio --noconfirm
 
 									;;
@@ -514,7 +518,7 @@ while [ $e -le 1 ]
 
 										###Reaper
 										printf "\n"
-										printf "Installing Reaper"
+										printf "Installing Reaper\n"
 										sudo pacman -S wget --noconfirm
 										wget -O reaper.tar.xz http://reaper.fm/files/6.x/reaper658_linux_x86_64.tar.xz
 										mkdir ./reaper
@@ -529,7 +533,7 @@ while [ $e -le 1 ]
 
 										###Ardour
 										printf "\n"
-										printf "Installing Ardour"
+										printf "Installing Ardour\n"
 										sudo pacman -S ardour --noconfirm
 
 									;;
@@ -538,7 +542,7 @@ while [ $e -le 1 ]
 
 										###LMMS
 										printf "\n"
-										printf "Installing LMMS"
+										printf "Installing LMMS\n"
 										sudo pacman -S lmms --noconfirm
 
 									;;
@@ -547,7 +551,7 @@ while [ $e -le 1 ]
 
 										###Qtractor
 										printf "\n"
-										printf "Installing Qtractor"
+										printf "Installing Qtractor\n"
 										sudo pacman -S qtractor --noconfirm
 
 									;;
@@ -556,7 +560,7 @@ while [ $e -le 1 ]
 
 										###Rosegarden
 										printf "\n"
-										printf "Installing Rosegarden"
+										printf "Installing Rosegarden\n"
 										sudo pacman -S rosegarden --noconfirm
 
 									;;
@@ -565,7 +569,7 @@ while [ $e -le 1 ]
 
 										###MusE
 										printf "\n"
-										printf "Installing MusE"
+										printf "Installing MusE\n"
 										sudo pacman -S muse --noconfirm
 
 									;;
@@ -574,7 +578,7 @@ while [ $e -le 1 ]
 
 										###Skip DAW Installation
 										printf "\n"
-										printf "Not Installing Any DAW"
+										printf "Not Installing Any DAW\n"
 
 									;;
 
