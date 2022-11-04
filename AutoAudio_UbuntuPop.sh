@@ -79,8 +79,15 @@ while [ $e -le 1 ]
 
 				###Update
 				printf "\n"
-                		printf "Updating The system"
+                printf "Updating The system"
 				sudo apt update -y && sudo apt upgrade -y
+				clear
+
+				### Installing the Liquorix kernel (best optimized for audio production a debian/ubuntu based distro enviroment)
+				### For documentation and such please refer to https://liquorix.net/
+				printf "Installing the liquorix kernel"
+				sudo add-apt-repository ppa:dametz/liquorix -y && sudo apt-get update
+				sudo apt-get intall linux-image-liquorix-amd64 linux-headers-liquorix-amd64 -y
 				clear
 				
 				### Audio Drivers
@@ -111,7 +118,17 @@ while [ $e -le 1 ]
 
 							printf "\n"
 							printf "Installing Pipewire packages\n"
-							printf "simulating installing piperwire and stuff"
+							notify "Install Pipewire"
+							sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream -y
+							sudo add-apt-repository ppa:pipewire-debian/wireplumber-upstream -y
+							sudo apt update
+							sudo apt install gstreamer1.0-pipewire libpipewire-0.3-{0,dev,modules} libspa-0.2-{bluetooth,dev,jack,modules} pipewire{,-{audio-client-libraries,pulse,bin,jack,alsa,v4l2,libcamera,locales,tests}} -y
+							sudo apt install wireplumber{,-doc} gir1.2-wp-0.4 libwireplumber-0.4-{0,dev} -y
+							systemctl --user --now disable pulseaudio.{socket,service}
+							systemctl --user mask pulseaudio
+							sudo cp -vRa /usr/share/pipewire /etc/
+							systemctl --user --now enable pipewire{,-pulse}.{socket,service} filter-chain.service
+							systemctl --user --now enable wireplumber.service
 							clear
 							((a++))
 
@@ -175,7 +192,7 @@ while [ $e -le 1 ]
 				
 				###Sysctl.conf
 				printf "\n"
-                		printf "Modifiying  /etc/sysctl.conf"
+                printf "Modifiying  /etc/sysctl.conf"
 				# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
 				echo 'fs.inotify.max_user_watches=600000' | sudo tee -a /etc/sysctl.conf
 				
