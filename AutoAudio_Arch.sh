@@ -112,11 +112,10 @@ while [ $e -le 1 ]
 							printf "Installing Pipewire packages\n"
 							echo "NOTE: When prompted, select (y)es to remove pulseaudio and pulseaudio-bluetooth."
 							# alsa-utils: For alsamixer (to increase base level of sound card)
-							sudo pacman -S pipewire pipewire-alsa pipewire-jack pipewire-pulse alsa-utils helvum
+							sudo pacman -S pipewire pipewire-alsa pipewire-jack pipewire-pulse alsa-utils helvum ardour
 
 							echo "/usr/lib/pipewire-0.3/jack" | sudo tee /etc/ld.so.conf.d/pipewire-jack.conf
 							sudo ldconfig
-							((a++))
 
 						else
 
@@ -141,7 +140,7 @@ while [ $e -le 1 ]
 
 				###Limits
 				printf "\n"
-                		printf "Modify limits.d/audio.conf\n"
+                printf "Modify limits.d/audio.conf\n"
 				# See https://wiki.linuxaudio.org/wiki/system_configuration for more information.
 				echo '@audio - rtprio 90
 				@audio - memlock unlimited' | sudo tee -a /etc/security/limits.d/audio.conf
@@ -519,13 +518,13 @@ while [ $e -le 1 ]
 										###Reaper
 										printf "\n"
 										printf "Installing Reaper\n"
-										sudo pacman -S wget --noconfirm
-										wget -O reaper.tar.xz http://reaper.fm/files/6.x/reaper658_linux_x86_64.tar.xz
-										mkdir ./reaper
-										tar -C ./reaper -xf reaper.tar.xz
-										sudo ./reaper/reaper_linux_x86_64/install-reaper.sh --install /opt --integrate-desktop --usr-local-bin-symlink
-										rm -rf ./reaper
-										rm reaper.tar.xz
+  										wget -O reaper.tar.xz http://reaper.fm/files/6.x/reaper669_linux_x86_64.tar.xz
+  										mkdir ./reaper
+  										tar -C ./reaper -xf reaper.tar.xz
+  										./reaper/reaper_linux_x86_64/install-reaper.sh --install ~/ --integrate-desktop
+  										rm -rf ./reaper
+ 										rm reaper.tar.xz
+										touch ~/REAPER/reaper.ini
 
 									;;
 
