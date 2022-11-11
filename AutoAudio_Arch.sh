@@ -116,6 +116,7 @@ while [ $e -le 1 ]
 
 							echo "/usr/lib/pipewire-0.3/jack" | sudo tee /etc/ld.so.conf.d/pipewire-jack.conf
 							sudo ldconfig
+							((a++))
 
 						else
 
